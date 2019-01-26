@@ -12,6 +12,12 @@ require "../common.php";
 if (isset($_POST['submit'])) {
   if (!hash_equals($_SESSION['csrf'], $_POST['csrf'])) die();
 
+  if(!$_SESSION['username']) { 
+    header('Refresh: 2; URL = login.php');
+    die("Need to login");
+  }
+    
+
   try  {
     $connection = new PDO($dsn, $username, $password, $options);
     
